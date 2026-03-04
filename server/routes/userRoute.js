@@ -3,12 +3,11 @@ const router = express.Router();
 
 const User = require("../models/user.model");
 const Symptom = require("../models/symptoms.model");
+const Doctor=require("../models/doctors.model")
+const authMiddleware=require("../middleware/authMiddleware");
 
-const authMiddleware=require("../middleware/authMiddleware")
 
 router.use(authMiddleware)
-
-
 
 router.post("/addToHistory",async (req,res)=>{
     let data = req.body;
@@ -48,5 +47,13 @@ router.get("/getHistory",async(req,res)=>{
     } 
 })
 
+router.get("/getDoctors",async(req,res)=>{
+    try{
+        const doctors=await Doctor.find();
+        return res.send({status:'ok',message:'Data Retrievd Sucessfully',doctors:doctors});
+    }catch(e){
+        return res.send({status:'error',error:'Server Error'});
+    }
+})
 
 module.exports=router;
