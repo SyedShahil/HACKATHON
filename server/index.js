@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const authRoute=require("./routes/authRoute");
 const userRoute=require("./routes/userRoute");
 
-mongoose.connect("mongodb://localhost:27017/healthcare").then(() => {
+mongoose.connect("mongodb+srv://puneeth:abcdefgh@cluster0.bt7tb0p.mongodb.net/healthcare").then(() => {
     console.log('Connected to MongoDB');
 }).catch((err) => {
     console.log(err);
