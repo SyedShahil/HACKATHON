@@ -5,7 +5,7 @@ const symptomSchema = new mongoose.Schema({
         {type:String}
     ],
     riskScore:{type:Number,required:true},
-    level:{type:String,enum:["low","medium","high"],default:"high"},
+    level:{type:String,enum:["low","moderate","high","critical"],default:"moderate"},
     recommendation: { type: String, required: true },
     reason: { type: String, required: true },
 });

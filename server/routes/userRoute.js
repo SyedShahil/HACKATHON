@@ -23,7 +23,6 @@ router.post("/addToHistory",async (req,res)=>{
             recommendation:data.recommendation,
             reason:data.reason
         });
-        console.log(newSymptom)
         if(!newSymptom) return res.send({status:'error',message:'Unable to add Symptom'})
         user.symptomsHistory.push(newSymptom._id);
         await user.save();
@@ -36,7 +35,7 @@ router.post("/addToHistory",async (req,res)=>{
 
 
 
-router.post("/getHistory",async(req,res)=>{
+router.get("/getHistory",async(req,res)=>{
     let email=req.user.email;
     try{
         const user=await User.findOne({email:email});
@@ -44,6 +43,7 @@ router.post("/getHistory",async(req,res)=>{
         const SymptomsData = await Symptom.find({ _id: { $in: user.symptomsHistory } });
         return res.send({status:'ok',data:SymptomsData});
     }catch(e){
+        console.log(e)
         return res.send({status:'error',error:'Server Issue'});
     } 
 })
